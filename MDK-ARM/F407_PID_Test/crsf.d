@@ -34,7 +34,8 @@ f407_pid_test/crsf.o: ..\User\CRSF\CRSF.c ..\User\CRSF\Crsf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\CRSF\CRC.h \
   ..\User\CRSF\CRSF_PROTOCOL.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h \
   D:\softs\mdk\ARM\ARMCLANG\include\string.h

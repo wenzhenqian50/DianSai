@@ -5,17 +5,12 @@
 #include "icm42688.h"
 #include "IMU.h"
 
-
+extern uint8_t arr[8];
 extern float imu_angle[3];	// ÍÓÂİÒÇ×ËÌ¬½Ç¶ÈÖµ
 
-extern float gyro_offset_x;	// ÍÓÂİÒÇÁãÆ«Öµ
-extern float gyro_offset_y;
-extern float gyro_offset_z;
-
 void imuUpdata(void);
-
-void calibrate_gyro(uint16_t sample_count);
-void read_gyro_corrected(float* cgx, float* cgy, float* cgz);
+int get_turn_error(void);
+void get_sensor_value(uint8_t arr[]);
 
 #endif
 

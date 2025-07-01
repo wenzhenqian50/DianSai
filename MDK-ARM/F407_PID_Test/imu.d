@@ -34,4 +34,6 @@ f407_pid_test/imu.o: ..\User\IMU\IMU.c ..\User\IMU\IMU.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdio.h

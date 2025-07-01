@@ -1,50 +1,84 @@
 #include "sensor.h"
 
+uint8_t arr[8] = {0};  //传感器的输入数组
 
 float imu_angle[3];	//存储角度值
-
-float gyro_offset_x = 0.0f;
-float gyro_offset_y = 0.0f;
-float gyro_offset_z = 0.0f;
 
 /* 陀螺仪心跳函数 */
 void imuUpdata(void) {
 	nowtime++;
 }
 
-/* 陀螺仪零偏计算函数 */
-void calibrate_gyro(uint16_t sample_count) {
-    long long gyro_sum_x = 0;
-    long long gyro_sum_y = 0;
-    long long gyro_sum_z = 0;
 
-    printf("Gyro calibration started. Do not move the device...\n");
-	
-	HAL_Delay((int)(sample_count * 0.9f) * 10);
-	
-	int average_count = (int)(sample_count * 0.1f);
-    for (uint16_t i = 0; i < average_count; i++) {
-        gyro_sum_x += imu_angle[0];
-        gyro_sum_y += imu_angle[1];
-        gyro_sum_z += imu_angle[2];
-        HAL_Delay(10); // 每次采样之间稍作延时，根据陀螺仪数据更新率调整
+/* 判断数组中元素 1 是否连续 */
+uint8_t isOnesContinuous(uint8_t arr[], int size) {
+    uint8_t hasSeenOne = 0;  // 标记是否已经遇到过 1
+    uint8_t hasSeenZeroAfterOne = 0;  // 标记在遇到 1 之后是否遇到过 0
+
+    for (int i = 0; i < 8; i++) {
+        if (arr[i] == size) {
+            if (hasSeenZeroAfterOne) {
+                // 如果在遇到 1 之后已经遇到过 0，说明 1 不连续
+                return 0;
+            }
+            hasSeenOne = 1;
+        } else if (hasSeenOne) {
+            // 如果已经遇到过 1，现在遇到 0，标记为已经遇到过 0
+            hasSeenZeroAfterOne = 1;
+        }
     }
-
-    // 计算平均值，注意强制类型转换为浮点数进行除法运算
-    gyro_offset_x = (float)gyro_sum_x / average_count;
-    gyro_offset_y = (float)gyro_sum_y / average_count;
-    gyro_offset_z = (float)gyro_sum_z / average_count;
-
-    printf("Gyro calibration finished.\n");
-    printf("Offset X: %.2f, Offset Y: %.2f, Offset Z: %.2f\n", gyro_offset_x, gyro_offset_y, gyro_offset_z);
+    return 1;
 }
 
-/* 获取陀螺仪零偏补偿后的值 */
-void read_gyro_corrected(float* cgx, float* cgy, float* cgz) {
-    int16_t raw_gx, raw_gy, raw_gz;
+void get_sensor_value(uint8_t arr[]) {
+    arr[0] = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);  // 读取传感器值
+    arr[1] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6);
+    arr[2] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5); 
+    arr[3] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4);
+    arr[4] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3);
+    arr[5] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2);
+    arr[6] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1);
+    arr[7] = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0);
+}
 
-    // 减去零偏值进行校正
-    *cgx = (float)imu_angle[0] - gyro_offset_x;
-    *cgy = (float)imu_angle[1] - gyro_offset_y;
-    *cgz = (float)imu_angle[2] - gyro_offset_z;
+/* 获取红外传感器偏移值 */
+int get_turn_error(void) {
+    static int error_last = 0;
+    int error = 0;
+    int value = 1;  //正负调整传感器方向，大小调节强度
+
+    get_sensor_value(arr);  // 获取传感器值
+
+    if(isOnesContinuous(arr, 8)) {
+        // 循迹
+        if(arr[0] == 0) {
+            error+=4*value;
+        }
+        if(arr[1] == 0) {
+            error+=3*value;
+        }
+        if(arr[2] == 0) {
+            error+=2*value;
+        }
+        if(arr[3] == 0) {
+            error+=value;
+        }
+        if(arr[4] == 0) {
+            error-=value;
+        }
+        if(arr[5] == 0) {
+            error-=2*value;
+        }
+        if(arr[6] == 0) {
+            error-=3*value;
+        }
+        if(arr[7] == 0) {
+            error-=4*value;
+        }
+        error_last = error;
+    }
+    else {
+        error = error_last;
+    }
+    return error;
 }

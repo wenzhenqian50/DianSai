@@ -40,5 +40,6 @@ f407_pid_test/shell.o: ..\User\shell.c ..\User\shell.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
-  ..\Core\Inc\adc.h
+  ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
+  ..\User\SPI_LCD\lcd_font.h ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h \
+  ..\User\CRSF\CRSF_PROTOCOL.h ..\Core\Inc\adc.h

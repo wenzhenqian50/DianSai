@@ -9,6 +9,8 @@
 extern uint8_t RxBuf[CRSF_MAX_PACKET_SIZE];
 extern uint8_t RxBuf_Index;
 
+extern int CrsfChannels[CRSF_NUM_CHANNELS];		// Ò£¿ØÆ÷Í¨µÀÖµ
+
 #define PACKED __attribute__((packed))
 
 typedef struct 

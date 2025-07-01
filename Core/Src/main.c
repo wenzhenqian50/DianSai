@@ -27,18 +27,25 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "icm42688.h"
+#include "sensor.h"
+#include "shell.h"
 #include <stdio.h>
 #include <math.h>
-#include "pid.h"
 #include "task.h"
-#include "shell.h"
-#include "icm42688.h"
+#include "menu.h"
+#include "lcd.h"
+#include "pid.h"
 #include "IMU.h"
-#include "sensor.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+
+
+#define REMOTE_CONTROL 0	// 遥控模式
+
 
 /* USER CODE END PTD */
 
@@ -55,14 +62,29 @@
 
 /* USER CODE BEGIN PV */
 
-extern int CrsfChannels[CRSF_NUM_CHANNELS];		// 遥控器通道值
+//	这里有一个 extern int CrsfChannels[CRSF_NUM_CHANNELS]; 移到 crsf.h 中去了,未检查可行性
 
-float Yaw = 0;
-float Pitch = 0;
-float Roll = 0;
-
+#if REMOTE_CONTROL
 int16_t speed = 0;
 int16_t error = 0;
+#endif
+
+/* --------------------LCD-------------------- */
+static uint16_t line_buffer[320];
+
+lcd_io lcd_io_desc = {
+    .spi = &hspi1,
+    .rst = {LCD_RST_GPIO_Port, LCD_RST_Pin, 0},
+    .bl  = {LCD_PWR_GPIO_Port, LCD_PWR_Pin, 1},
+    .cs  = {LCD_CS_GPIO_Port , LCD_CS_Pin , 0},
+    .dc  = {LCD_DC_GPIO_Port , LCD_DC_Pin , 0},
+};
+
+lcd lcd_desc = {
+    .io = &lcd_io_desc,
+    .line_buffer = line_buffer,
+};
+/* ------------------------------------------- */
 
 /* USER CODE END PV */
 
@@ -76,24 +98,24 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	static float x0 = 0;
-	static float y0 = 0;
+//	static float x0 = 0;
+//	static float y0 = 0;
 	
-	if(htim->Instance == TIM1) {	// 10ms
-		IMU_getYawPitchRoll(imu_angle);
+	if(htim->Instance == TIM1) {			// 10ms
+
+		IMU_getYawPitchRoll(imu_angle);		// 更新陀螺仪角度
 		
-	    // 遥控器控制
-//		speed = (CrsfChannels[1] - 1000) / 20;
-//		error = (CrsfChannels[0] - 1000) / 40;
-//		PID_Speed(speed+error,speed-error);
-		
-		x0 = x0 + 1 * sin(imu_angle[0] / 57.296f);
-		y0 = y0 + 1 * cos(imu_angle[0] / 57.296f);
-		
-		printf("%.2f,%.2f\n",x0,y0);
+#if REMOTE_CONTROL
+		speed = (CrsfChannels[1] - 1000) / 20;
+		error = (CrsfChannels[0] - 1000) / 40;
+		PID_Speed(speed+error,speed-error);
+#endif
+//		x0 = x0 + 1 * sin(imu_angle[0] / 57.296f);
+//		y0 = y0 + 1 * cos(imu_angle[0] / 57.296f);
+//		printf("%.2f,%.2f\n",x0,y0);
 	}
 	if(htim->Instance == TIM5) {	// 100ns
-		imuUpdata();
+		imuUpdata();				// IMU心跳
 	}
 }
 
@@ -117,7 +139,11 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  Crc_init(0xD5);
+	
+#if REMOTE_CONTROL
+  Crc_init(0xD5);		// crsf接收机初始化
+#endif
+	
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -143,13 +169,18 @@ int main(void)
   /* USER CODE BEGIN 2 */
   
   /* ----------用户初始化函数---------- */
-  ShellInit();
-  SchedulerInit();
-  IMU_init();
+  ShellInit();												// 初始化命令系统
+  SchedulerInit();											// 初始化任务管理系统
+  lcd_init_dev(&lcd_desc, LCD_1_47_INCH, LCD_ROTATE_90);	// 初始化显示屏
+  MenuInit();												// 初始化菜单
+  lcd_clear(&lcd_desc, BLACK);
+  IMU_init();												// 初始化陀螺仪
   HAL_Delay(100);
   
   /* ----------系统初始化函数---------- */
-//  HAL_UART_Receive_IT(&huart2, (uint8_t *)RxBuffer,LENGTH);	// 接收机
+#if REMOTE_CONTROL
+  HAL_UART_Receive_IT(&huart2, (uint8_t *)RxBuffer,LENGTH);	// 开启接收机
+#endif
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_Base_Start_IT(&htim5);
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);		// 启动左编码器
@@ -157,8 +188,10 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
   
-  /* ----------校准函数---------- */
-//  calibrate_gyro(600);
+  /* ----------初始程序---------- */
+  
+  lcd_print(&lcd_desc, 0, 40, "> IPS LCD 1.47inch 320x172");
+  lcd_print(&lcd_desc, 0, 60, "> STM32F407VGT6");
   
   /* USER CODE END 2 */
 
@@ -166,6 +199,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+//	printf("%d,%d,%d,%d,%d,%d,%d,%d\n",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]);		//灰度传感器状态
 	  
 //	printf("ch1:%d\r\n",CrsfChannels[0]);
 //	printf("ch2:%d\r\n",CrsfChannels[1]);
@@ -180,9 +214,11 @@ int main(void)
 //	printf("ch11:%d\r\n",CrsfChannels[10]);
 //	printf("ch12:%d\r\n",CrsfChannels[11]);
 //	HAL_Delay(100);
+	  
 //	read_gyro_corrected(&Yaw,&Pitch,&Roll);
 //	printf("%.2f %.2f %.2f\n",Yaw,Pitch,Roll);
 //	printf("%.2f %.2f %.2f\n",imu_angle[0],imu_angle[1],imu_angle[2]);
+	  
 	SchedulerRun();
     /* USER CODE END WHILE */
 

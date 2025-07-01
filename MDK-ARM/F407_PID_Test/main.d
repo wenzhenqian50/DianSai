@@ -33,14 +33,16 @@ f407_pid_test/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   ..\Core\Inc\adc.h ..\Core\Inc\dma.h ..\Core\Inc\spi.h \
   ..\Core\Inc\tim.h ..\Core\Inc\usart.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\CRSF\Crsf.h \
   ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h \
   D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\Core\Inc\gpio.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\User\pid.h ..\User\task.h \
-  ..\User\shell.h D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
+  ..\User\IMU\icm42688.h ..\User\sensor.h ..\User\IMU\IMU.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\User\shell.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
   D:\softs\mdk\ARM\ARMCLANG\include\ctype.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\errno.h ..\User\IMU\icm42688.h \
-  ..\User\IMU\IMU.h ..\User\sensor.h
+  D:\softs\mdk\ARM\ARMCLANG\include\errno.h ..\User\task.h \
+  ..\User\menu.h ..\User\pid.h

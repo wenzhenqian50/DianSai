@@ -1,19 +1,21 @@
-f407_pid_test/stm32f4xx_hal_msp.o: ..\Core\Src\stm32f4xx_hal_msp.c \
-  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+f407_pid_test/menu.o: ..\User\menu.c ..\User\menu.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stddef.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdint.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\Core\Inc\main.h \
+  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h \
   ..\Drivers\CMSIS\Include\core_cm4.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdint.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\cmsis_version.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\cmsis_compiler.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\cmsis_armclang.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\mpu_armv7.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stddef.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h \

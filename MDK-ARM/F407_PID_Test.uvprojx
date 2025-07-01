@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../MDK-ARM;../User;../User/IMU;../User/CRSF</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../MDK-ARM;../User;../User/IMU;../User/CRSF;../User/SPI_LCD</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1103,6 +1103,41 @@
               <FileName>CRSF_PROTOCOL.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\CRSF\CRSF_PROTOCOL.h</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\SPI_LCD\lcd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\SPI_LCD\lcd_font.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\SPI_LCD\lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>fsm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\fsm.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\fsm.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -33,6 +33,8 @@ f407_pid_test/sensor.o: ..\User\sensor.c ..\User\sensor.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   ..\User\IMU\icm42688.h ..\User\IMU\IMU.h \
   D:\softs\mdk\ARM\ARMCLANG\include\math.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdio.h
