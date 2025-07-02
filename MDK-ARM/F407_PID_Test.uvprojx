@@ -82,7 +82,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -1030,16 +1030,6 @@
               <FilePath>..\User\pid.h</FilePath>
             </File>
             <File>
-              <FileName>shell.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\shell.c</FilePath>
-            </File>
-            <File>
-              <FileName>shell.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\shell.h</FilePath>
-            </File>
-            <File>
               <FileName>task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\task.c</FilePath>
@@ -1060,25 +1050,40 @@
               <FilePath>..\User\sensor.h</FilePath>
             </File>
             <File>
-              <FileName>icm42688.c</FileName>
+              <FileName>menu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\IMU\icm42688.c</FilePath>
+              <FilePath>..\User\menu.c</FilePath>
             </File>
             <File>
-              <FileName>IMU.c</FileName>
+              <FileName>menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>fsm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\IMU\IMU.c</FilePath>
+              <FilePath>..\User\fsm.c</FilePath>
             </File>
             <File>
-              <FileName>icm42688.h</FileName>
+              <FileName>fsm.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\User\IMU\icm42688.h</FilePath>
+              <FilePath>..\User\fsm.h</FilePath>
             </File>
             <File>
-              <FileName>IMU.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\IMU\IMU.h</FilePath>
+              <FileName>vofa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vofa.c</FilePath>
             </File>
+            <File>
+              <FileName>vofa.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vofa.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Bottom</GroupName>
+          <Files>
             <File>
               <FileName>CRC.c</FileName>
               <FileType>1</FileType>
@@ -1105,6 +1110,31 @@
               <FilePath>..\User\CRSF\CRSF_PROTOCOL.h</FilePath>
             </File>
             <File>
+              <FileName>icm42688.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\IMU\icm42688.c</FilePath>
+            </File>
+            <File>
+              <FileName>icm42688.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\IMU\icm42688.h</FilePath>
+            </File>
+            <File>
+              <FileName>IMU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\IMU\IMU.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\IMU\IMU.h</FilePath>
+            </File>
+            <File>
+              <FileName>lcd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\SPI_LCD\lcd.h</FilePath>
+            </File>
+            <File>
               <FileName>lcd_core.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\SPI_LCD\lcd_core.c</FilePath>
@@ -1115,29 +1145,24 @@
               <FilePath>..\User\SPI_LCD\lcd_font.c</FilePath>
             </File>
             <File>
+              <FileName>lcd_font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\SPI_LCD\lcd_font.h</FilePath>
+            </File>
+            <File>
               <FileName>lcd_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\SPI_LCD\lcd_port.c</FilePath>
             </File>
             <File>
-              <FileName>menu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\menu.c</FilePath>
-            </File>
-            <File>
-              <FileName>menu.h</FileName>
+              <FileName>lcd_port.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\User\menu.h</FilePath>
+              <FilePath>..\User\SPI_LCD\lcd_port.h</FilePath>
             </File>
             <File>
-              <FileName>fsm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\fsm.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsm.h</FileName>
+              <FileName>picture.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\User\fsm.h</FilePath>
+              <FilePath>..\User\SPI_LCD\picture.h</FilePath>
             </File>
           </Files>
         </Group>

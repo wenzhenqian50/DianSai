@@ -3,6 +3,9 @@
 
 #include "main.h"
 #include "tim.h"
+#include "math.h"
+#include "fsm.h"
+#include "sensor.h"
 
 /* PID结构体部分 */
 /* PID三个权重 */
@@ -26,11 +29,13 @@ typedef struct {
 
 extern pid_t pid_l;
 extern pid_t pid_r;
+extern pid_t pid_angle;
+extern pid_t pid_turn;
 
-float PID_Calculate(pid_t *pid,float Measure,  float Target);
 void set_motor_left_speed(int target_pwm);
 void set_motor_right_speed(int target_pwm);
 void PID_Speed(int speed_l, int speed_r);
+void PID_Angle(float angle);
 
 #endif
 

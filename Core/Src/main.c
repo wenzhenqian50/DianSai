@@ -37,15 +37,12 @@
 #include "lcd.h"
 #include "pid.h"
 #include "IMU.h"
+#include "vofa.h"
 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
-
-#define REMOTE_CONTROL 0	// 遥控模式
-
 
 /* USER CODE END PTD */
 
@@ -97,26 +94,54 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+/* 串口重定向 */
+int fputc(int ch, FILE *f) {
+	HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,HAL_MAX_DELAY);
+	return ch;
+}
+
+/* 定时回调函数 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-//	static float x0 = 0;
-//	static float y0 = 0;
+	// static float x0 = 0;
+	// static float y0 = 0;
 	
 	if(htim->Instance == TIM1) {			// 10ms
 
 		IMU_getYawPitchRoll(imu_angle);		// 更新陀螺仪角度
+		
 		
 #if REMOTE_CONTROL
 		speed = (CrsfChannels[1] - 1000) / 20;
 		error = (CrsfChannels[0] - 1000) / 40;
 		PID_Speed(speed+error,speed-error);
 #endif
-//		x0 = x0 + 1 * sin(imu_angle[0] / 57.296f);
-//		y0 = y0 + 1 * cos(imu_angle[0] / 57.296f);
-//		printf("%.2f,%.2f\n",x0,y0);
+		
+		// x0 = x0 + 1 * sin(imu_angle[0] / 57.296f);
+		// y0 = y0 + 1 * cos(imu_angle[0] / 57.296f);
+		// printf("%.2f,%.2f\n",x0,y0);
 	}
 	if(htim->Instance == TIM5) {	// 100ns
-		imuUpdata();				// IMU心跳
+		imuUpdata();
 	}
+}
+
+
+
+/* 串口空闲中断回调函数 */
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
+  if (huart->Instance == USART1) {
+  
+#if VOFA_MODE	// 调参模式
+      rx_len = Size;      // 记录本次接收到的数据长度
+      uart_flag = 1;      // 设置标志位，通知主循环处理
+#endif
+  
+  }
+  if(huart->Instance == USART6) {	// 视觉模块回传数据
+    NumNow[0] = visionBuf[0] - 48;
+    NumNow[1] = visionBuf[2] - 48;
+    NumUpdate = 1;
+  }
 }
 
 
@@ -166,39 +191,46 @@ int main(void)
   MX_TIM5_Init();
   MX_SPI2_Init();
   MX_USART2_UART_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   
   /* ----------用户初始化函数---------- */
-  ShellInit();												// 初始化命令系统
-  SchedulerInit();											// 初始化任务管理系统
+
+  SchedulerInit();											                  // 初始化任务管理系统
   lcd_init_dev(&lcd_desc, LCD_1_47_INCH, LCD_ROTATE_90);	// 初始化显示屏
-  MenuInit();												// 初始化菜单
+  MenuInit();												                      // 初始化菜单
   lcd_clear(&lcd_desc, BLACK);
-  IMU_init();												// 初始化陀螺仪
+  IMU_init();												                      // 初始化陀螺仪
   HAL_Delay(100);
   
   /* ----------系统初始化函数---------- */
 #if REMOTE_CONTROL
   HAL_UART_Receive_IT(&huart2, (uint8_t *)RxBuffer,LENGTH);	// 开启接收机
 #endif
+
+#if VOFA_MODE
+  HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+#endif
+  HAL_UARTEx_ReceiveToIdle_IT(&huart6,visionBuf,10);				// 启动视觉模块
+  HAL_ADC_Start_DMA(&hadc1,(uint32_t *)&adcValue, 1);				// 启动光线传感器
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_Base_Start_IT(&htim5);
-  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);		// 启动左编码器
-  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);		// 启动右编码器
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);					  // 启动左编码器
+  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);					  // 启动右编码器
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
   
   /* ----------初始程序---------- */
-  
-  lcd_print(&lcd_desc, 0, 40, "> IPS LCD 1.47inch 320x172");
-  lcd_print(&lcd_desc, 0, 60, "> STM32F407VGT6");
-  
+
+  printf("---------- Program Start ----------\r\n");
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+//	printf("adc:%d\n",adcValue);
 //	printf("%d,%d,%d,%d,%d,%d,%d,%d\n",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]);		//灰度传感器状态
 	  
 //	printf("ch1:%d\r\n",CrsfChannels[0]);

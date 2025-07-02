@@ -1,12 +1,5 @@
 f407_pid_test/task.o: ..\User\task.c ..\User\task.h \
   ..\User\IMU\icm42688.h D:\softs\mdk\ARM\ARMCLANG\include\stdint.h \
-  ..\User\shell.h D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\string.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\ctype.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\errno.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\Core\Inc\usart.h \
   ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
@@ -41,6 +34,10 @@ f407_pid_test/task.o: ..\User\task.c ..\User\task.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
-  ..\User\SPI_LCD\lcd_font.h ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h \
-  ..\User\CRSF\CRSF_PROTOCOL.h ..\Core\Inc\adc.h ..\User\menu.h \
-  ..\User\pid.h ..\Core\Inc\tim.h
+  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
+  ..\User\menu.h D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\pid.h \
+  ..\Core\Inc\tim.h D:\softs\mdk\ARM\ARMCLANG\include\math.h \
+  ..\User\fsm.h ..\User\sensor.h ..\User\IMU\IMU.h ..\Core\Inc\usart.h \
+  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\string.h

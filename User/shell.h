@@ -13,6 +13,8 @@
 #include "main.h"
 #include "adc.h"
 
+extern bool CmdReady;
+
 void ShellInit(void);
 void ShellRun(void); // 在主循环中调用的处理函数
 

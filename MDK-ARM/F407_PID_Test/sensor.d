@@ -37,4 +37,6 @@ f407_pid_test/sensor.o: ..\User\sensor.c ..\User\sensor.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   ..\User\IMU\icm42688.h ..\User\IMU\IMU.h \
   D:\softs\mdk\ARM\ARMCLANG\include\math.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\Core\Inc\usart.h \
+  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\string.h

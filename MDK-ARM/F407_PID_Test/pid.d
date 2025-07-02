@@ -35,4 +35,10 @@ f407_pid_test/pid.o: ..\User\pid.c ..\User\pid.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
-  ..\Core\Inc\tim.h
+  ..\Core\Inc\tim.h D:\softs\mdk\ARM\ARMCLANG\include\math.h \
+  ..\User\fsm.h ..\User\menu.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\sensor.h \
+  ..\User\IMU\icm42688.h ..\User\IMU\IMU.h ..\Core\Inc\usart.h \
+  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\string.h

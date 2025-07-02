@@ -11,8 +11,8 @@ typedef struct {
 
 static task_t scheduler_task[] = 	//任务数组
 {
-    {ShellRun, 10,  0},
-	{MenuRun , 100, 0}
+	{MenuRun ,   100, 0},
+	{VisionProc, 50,  0}
 };
 
 void SchedulerInit() {

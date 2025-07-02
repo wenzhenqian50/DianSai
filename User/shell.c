@@ -7,8 +7,8 @@
 
 /* 系统局部变量 */
 static char ShellRxBuf[SHELL_BUFFER_SIZE];
-static bool CmdReady = false; 		// 命令准备好被处理
 static uint16_t SystemVoltageSample = 0;	// 系统电压采样值
+bool CmdReady = false; 		// 命令准备好被处理
 
 /* 结构体变量指针定义 */
 typedef void (*cmd_handler_t)(int argc, char *argv[]);
@@ -128,7 +128,7 @@ void ShellInit(void) {
 	icon();
 	SystemLog();
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart1,(uint8_t *)ShellRxBuf,SHELL_BUFFER_SIZE);
-	HAL_ADC_Start_DMA(&hadc1,(uint32_t *)&SystemVoltageSample, 1);
+//	HAL_ADC_Start_DMA(&hadc1,(uint32_t *)&SystemVoltageSample, 1);
 }
 
 
@@ -414,6 +414,8 @@ int fputc(int ch, FILE *f) {
 	return ch;
 }
 
+#if 0
+
 /* 串口空闲中断回调 */
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 	if(huart->Instance == USART1) {
@@ -421,4 +423,5 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 	}
 }
 
+#endif
 

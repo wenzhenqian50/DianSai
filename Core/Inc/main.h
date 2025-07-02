@@ -32,6 +32,10 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
+
+#define REMOTE_CONTROL 0	// 遥控模式
+#define VOFA_MODE	1		// 调参模式
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

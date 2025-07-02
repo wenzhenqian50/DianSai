@@ -45,4 +45,4 @@ f407_pid_test/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
   D:\softs\mdk\ARM\ARMCLANG\include\ctype.h \
   D:\softs\mdk\ARM\ARMCLANG\include\errno.h ..\User\task.h \
-  ..\User\menu.h ..\User\pid.h
+  ..\User\menu.h ..\User\pid.h ..\User\fsm.h ..\User\vofa.h
