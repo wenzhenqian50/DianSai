@@ -36,6 +36,8 @@ void set_motor_left_speed(int target_pwm);
 void set_motor_right_speed(int target_pwm);
 void PID_Speed(int speed_l, int speed_r);
 void PID_Angle(float angle);
+void PID_Turn(int speed);
+void MotorRun(void);
 
 #endif
 

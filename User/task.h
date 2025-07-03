@@ -5,6 +5,7 @@
 #include "main.h"
 #include "menu.h"
 #include "pid.h"
+#include "vofa.h"
 
 
 void SchedulerRun(void);

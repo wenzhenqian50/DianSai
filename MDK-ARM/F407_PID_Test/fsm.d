@@ -1,5 +1,5 @@
-f407_pid_test/fsm.o: ..\User\fsm.c ..\User\fsm.h ..\Core\Inc\main.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+f407_pid_test/fsm.o: ..\User\fsm.c ..\User\fsm.h ..\User\sensor.h \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
@@ -35,5 +35,10 @@ f407_pid_test/fsm.o: ..\User\fsm.c ..\User\fsm.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
-  ..\User\menu.h D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h
+  ..\User\IMU\icm42688.h ..\User\IMU\IMU.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\math.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\Core\Inc\usart.h \
+  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\User\menu.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h ..\User\pid.h \
+  ..\Core\Inc\tim.h

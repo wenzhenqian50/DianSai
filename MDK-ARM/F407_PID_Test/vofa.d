@@ -38,4 +38,7 @@ f407_pid_test/vofa.o: ..\User\vofa.c ..\User\vofa.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   ..\Core\Inc\usart.h ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h \
-  ..\User\CRSF\CRSF_PROTOCOL.h
+  ..\User\CRSF\CRSF_PROTOCOL.h ..\User\pid.h ..\Core\Inc\tim.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\User\fsm.h \
+  ..\User\sensor.h ..\User\IMU\icm42688.h ..\User\IMU\IMU.h \
+  ..\User\menu.h D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h

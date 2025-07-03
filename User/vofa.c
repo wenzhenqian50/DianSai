@@ -4,9 +4,9 @@ uint8_t rx_buffer[RX_BUFFER_SIZE];
 volatile uint16_t rx_len = 0;
 volatile uint8_t uart_flag = 0;
 
-float pid_p = 0.0f;
-float pid_i = 0.0f;
-float pid_d = 0.0f;
+#define pid pid_angle
+
+int testValue = 0;
 
 /* 处理串口缓冲区数据 */
 void UpperUartTask(void) {
@@ -33,17 +33,17 @@ void UpperUartTask(void) {
 			
             switch (param_index) {
                 case 1:
-                    pid_p = param_value;
+                    pid.Kp = param_value;
                     break;
                 case 2:
-                    pid_i = param_value;
+                    pid.Ki = param_value;
                     break;
                 case 3:
-                    pid_d = param_value;
+                    pid.Kd = param_value;
                     break;
-                // case 4:
-                //     Expand
-				//     break;
+                case 4:
+                    testValue = param_value;
+				    break;
                 default:
                     printf("Error: Invalid parameter index\n");
             }

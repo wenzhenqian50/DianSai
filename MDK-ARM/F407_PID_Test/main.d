@@ -41,8 +41,8 @@ f407_pid_test/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
   D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\Core\Inc\gpio.h \
   ..\User\IMU\icm42688.h ..\User\sensor.h ..\User\IMU\IMU.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\User\shell.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\ctype.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\User\fsm.h ..\User\menu.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h ..\User\pid.h \
+  ..\User\shell.h D:\softs\mdk\ARM\ARMCLANG\include\ctype.h \
   D:\softs\mdk\ARM\ARMCLANG\include\errno.h ..\User\task.h \
-  ..\User\menu.h ..\User\pid.h ..\User\fsm.h ..\User\vofa.h
+  ..\User\vofa.h

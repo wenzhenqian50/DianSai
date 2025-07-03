@@ -5,6 +5,7 @@
 #include <string.h>
 #include "main.h"
 #include "usart.h"
+#include "pid.h"
 
 #define RX_BUFFER_SIZE 32
 
@@ -12,9 +13,7 @@ extern uint8_t           rx_buffer[RX_BUFFER_SIZE];
 extern volatile uint16_t rx_len;
 extern volatile uint8_t  uart_flag;
 
-extern float pid_p;
-extern float pid_i;
-extern float pid_d;
+extern int testValue;
 
 void UpperUartTask(void);
 

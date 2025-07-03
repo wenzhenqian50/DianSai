@@ -40,4 +40,4 @@ f407_pid_test/task.o: ..\User\task.c ..\User\task.h \
   ..\Core\Inc\tim.h D:\softs\mdk\ARM\ARMCLANG\include\math.h \
   ..\User\fsm.h ..\User\sensor.h ..\User\IMU\IMU.h ..\Core\Inc\usart.h \
   ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\string.h
+  D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\User\vofa.h

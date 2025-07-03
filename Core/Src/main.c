@@ -102,23 +102,21 @@ int fputc(int ch, FILE *f) {
 
 /* 定时回调函数 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	// static float x0 = 0;
-	// static float y0 = 0;
-	
-	if(htim->Instance == TIM1) {			// 10ms
+	if(htim->Instance == TIM1) {	// 10ms
 
 		IMU_getYawPitchRoll(imu_angle);		// 更新陀螺仪角度
-		
+		// printf("%.1f\n",imu_angle[0]);
+		// MotorRun();   // 由状态机控制电机
+		// printf("adc:%d\n",adcValue);
+		// get_sensor_value(arr);
+		// printf("%d,%d,%d,%d,%d,%d,%d,%d\n",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]);
 		
 #if REMOTE_CONTROL
 		speed = (CrsfChannels[1] - 1000) / 20;
 		error = (CrsfChannels[0] - 1000) / 40;
 		PID_Speed(speed+error,speed-error);
 #endif
-		
-		// x0 = x0 + 1 * sin(imu_angle[0] / 57.296f);
-		// y0 = y0 + 1 * cos(imu_angle[0] / 57.296f);
-		// printf("%.2f,%.2f\n",x0,y0);
+
 	}
 	if(htim->Instance == TIM5) {	// 100ns
 		imuUpdata();
@@ -138,9 +136,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
   
   }
   if(huart->Instance == USART6) {	// 视觉模块回传数据
-    NumNow[0] = visionBuf[0] - 48;
-    NumNow[1] = visionBuf[2] - 48;
-    NumUpdate = 1;
+	  vision_rx_len = Size;
+	  NumUpdate = 1;
   }
 }
 
@@ -196,11 +193,11 @@ int main(void)
   
   /* ----------用户初始化函数---------- */
 
-  SchedulerInit();											                  // 初始化任务管理系统
-  lcd_init_dev(&lcd_desc, LCD_1_47_INCH, LCD_ROTATE_90);	// 初始化显示屏
-  MenuInit();												                      // 初始化菜单
+  SchedulerInit();											                  		// 初始化任务管理系统
+  lcd_init_dev(&lcd_desc, LCD_1_47_INCH, LCD_ROTATE_90);							// 初始化显示屏
+  MenuInit();												                      	// 初始化菜单
   lcd_clear(&lcd_desc, BLACK);
-  IMU_init();												                      // 初始化陀螺仪
+  IMU_init();												                      	// 初始化陀螺仪
   HAL_Delay(100);
   
   /* ----------系统初始化函数---------- */
@@ -211,7 +208,7 @@ int main(void)
 #if VOFA_MODE
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
 #endif
-  HAL_UARTEx_ReceiveToIdle_IT(&huart6,visionBuf,10);				// 启动视觉模块
+  HAL_UARTEx_ReceiveToIdle_DMA(&huart6,visionBuf,10);				// 启动视觉模块
   HAL_ADC_Start_DMA(&hadc1,(uint32_t *)&adcValue, 1);				// 启动光线传感器
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_Base_Start_IT(&htim5);

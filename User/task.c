@@ -9,10 +9,17 @@ typedef struct {
     uint32_t last_run;
 }task_t;
 
+static void Heart(void) {
+	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_0);
+}
+
 static task_t scheduler_task[] = 	//任务数组
 {
-	{MenuRun ,   100, 0},
-	{VisionProc, 50,  0}
+	{MenuRun ,      100, 0},
+	{VisionProc,    50,  0},
+    {UpperUartTask, 20,  0},
+    {SystemRun,     20,  0},
+	{Heart,			500, 0},
 };
 
 void SchedulerInit() {
