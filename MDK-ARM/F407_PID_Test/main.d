@@ -36,13 +36,11 @@ f407_pid_test/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
   ..\Core\Inc\adc.h ..\Core\Inc\dma.h ..\Core\Inc\spi.h \
-  ..\Core\Inc\tim.h ..\Core\Inc\usart.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\CRSF\Crsf.h \
-  ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\Core\Inc\gpio.h \
-  ..\User\IMU\icm42688.h ..\User\sensor.h ..\User\IMU\IMU.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\User\fsm.h ..\User\menu.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h ..\User\pid.h \
-  ..\User\shell.h D:\softs\mdk\ARM\ARMCLANG\include\ctype.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\errno.h ..\User\task.h \
-  ..\User\vofa.h
+  ..\Core\Inc\tim.h ..\Core\Inc\usart.h ..\Core\Inc\gpio.h \
+  ..\User\headfile.h D:\softs\mdk\ARM\ARMCLANG\include\string.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\soft_timer.h \
+  ..\User\muti_com.h D:\softs\mdk\ARM\ARMCLANG\include\stdarg.h \
+  ..\User\IMU\icm42688.h ..\User\sensor.h ..\User\fsm.h ..\User\hsm.h \
+  ..\User\vision.h ..\User\track.h ..\User\vofa.h ..\User\task.h \
+  ..\User\IMU\IMU.h D:\softs\mdk\ARM\ARMCLANG\include\math.h \
+  ..\User\pid.h

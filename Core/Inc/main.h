@@ -33,7 +33,8 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
 
-#define REMOTE_CONTROL 0	// 遥控模式
+extern lcd lcd_desc;
+
 #define VOFA_MODE	1		// 调参模式
 
 /* USER CODE END Includes */
@@ -51,8 +52,6 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
-extern lcd lcd_desc;
-
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
@@ -67,6 +66,8 @@ void Error_Handler(void);
 #define RED_GPIO_Port GPIOC
 #define GREEN_Pin GPIO_PIN_1
 #define GREEN_GPIO_Port GPIOC
+#define SysHeart_Pin GPIO_PIN_14
+#define SysHeart_GPIO_Port GPIOD
 #define LCD_PWR_Pin GPIO_PIN_3
 #define LCD_PWR_GPIO_Port GPIOD
 #define LCD_RST_Pin GPIO_PIN_4

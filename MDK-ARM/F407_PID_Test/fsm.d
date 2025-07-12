@@ -1,12 +1,17 @@
-f407_pid_test/fsm.o: ..\User\fsm.c ..\User\fsm.h ..\User\sensor.h \
-  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+f407_pid_test/fsm.o: ..\User\fsm.c ..\User\fsm.h ..\User\headfile.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\string.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdint.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\soft_timer.h \
+  ..\User\muti_com.h D:\softs\mdk\ARM\ARMCLANG\include\stdarg.h \
+  ..\Core\Inc\usart.h ..\Core\Inc\main.h \
+  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h \
   ..\Drivers\CMSIS\Include\core_cm4.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdint.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\cmsis_version.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\cmsis_compiler.h \
   E:\04_Code\03_Diansai\04_Other\F407_PID_Test\Drivers\CMSIS\Include\cmsis_armclang.h \
@@ -34,11 +39,7 @@ f407_pid_test/fsm.o: ..\User\fsm.c ..\User\fsm.h ..\User\sensor.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
-  ..\User\IMU\icm42688.h ..\User\IMU\IMU.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\math.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\Core\Inc\usart.h \
-  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\User\menu.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h ..\User\pid.h \
-  ..\Core\Inc\tim.h
+  ..\User\SPI_LCD\lcd_font.h ..\User\IMU\icm42688.h ..\User\sensor.h \
+  ..\User\vision.h ..\User\track.h ..\User\vofa.h ..\User\task.h \
+  ..\User\IMU\IMU.h D:\softs\mdk\ARM\ARMCLANG\include\math.h \
+  ..\Core\Inc\tim.h ..\User\hsm.h ..\User\pid.h

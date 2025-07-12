@@ -1,11 +1,7 @@
 #ifndef _PID_H
 #define _PID_H
 
-#include "main.h"
-#include "tim.h"
-#include "math.h"
-#include "fsm.h"
-#include "sensor.h"
+#include "headfile.h"
 
 /* PID结构体部分 */
 /* PID三个权重 */
@@ -29,15 +25,24 @@ typedef struct {
 
 extern pid_t pid_l;
 extern pid_t pid_r;
+extern pid_t pid_d;
 extern pid_t pid_angle;
 extern pid_t pid_turn;
+
+extern volatile float TargetAngle;
+extern volatile int CountAll;
+extern volatile float Angle_d;
+extern volatile int Length;
 
 void set_motor_left_speed(int target_pwm);
 void set_motor_right_speed(int target_pwm);
 void PID_Speed(int speed_l, int speed_r);
 void PID_Angle(float angle);
 void PID_Turn(int speed);
+void PID_Distance(void);
 void MotorRun(void);
+void SetTurnAngle(float angle);
+void SetDistanceParam(int length);
 
 #endif
 

@@ -2,6 +2,11 @@
 
 #define MAX_PWM 999		// 输出电机PWM限幅
 
+volatile float TargetAngle = 0;
+volatile int CountAll = 0;		// 每次调用PID_Distance前要将count_all清零
+volatile float Angle_d = 0;		// 设置为启动时的角度
+volatile int Length = 0;		// 设置行进脉冲数
+
 /* 右电机速度环pid参数 */
 pid_t pid_r ={	
 	.Kp = 21,			
@@ -22,6 +27,38 @@ pid_t pid_r ={
 pid_t pid_l ={	
 	.Kp = 21,			
 	.Ki = 7.7,				
+	.Kd = 0,				
+	.Target = 0,			
+	.Measure = 0,			
+	.Error = {0,0,0},				
+	.KpOut = 0,				
+	.KiOut = 0,				
+	.KdOut = 0,				
+	.PID_Out = 0,			
+	.PID_Limit_MAX = 999,	
+	.Ki_Limit_MAX = 999,	
+};
+
+/* 距离环pid参数 */
+pid_t pid_d ={	
+	.Kp = 0.5,			
+	.Ki = 0.01,				
+	.Kd = 0,				
+	.Target = 0,			
+	.Measure = 0,			
+	.Error = {0,0,0},				
+	.KpOut = 0,				
+	.KiOut = 0,				
+	.KdOut = 0,				
+	.PID_Out = 0,			
+	.PID_Limit_MAX = 999,	
+	.Ki_Limit_MAX = 999,	
+};
+
+/* 距离转向环pid参数 */
+pid_t pid_turn_d ={	
+	.Kp = 40,			
+	.Ki = 0,				
 	.Kd = 0,				
 	.Target = 0,			
 	.Measure = 0,			
@@ -99,10 +136,18 @@ static float PID_Calculate(pid_t *pid, float Measure, float Target) {
 }
 
 
-// **角度误差计算** (确保误差始终在 -180° ~ 180°)
+/* 角度误差计算(确保误差始终在 -180°~ 180°) */
 static float Compute_Angle_Error(float target_angle, float current_angle) {
     float error = target_angle - current_angle;
-    return fmod(error + 180.0f, 360.0f) - 180.0f;
+
+    // 将误差归一化到 -180 ~ 180 度之间
+    while (error > 180.0f) {
+        error -= 360.0f;
+    }
+    while (error < -180.0f) {
+        error += 360.0f;
+    }
+    return error;
 }
 
 // 增量式 PID 角度环计算
@@ -193,62 +238,110 @@ void PID_Angle(float angle) {
 
 /* 转向控制函数 */
 void PID_Turn(int speed) {
-	int error = get_turn_error();
+	int error = GetTurnError();
 	PID_Speed(speed + error, speed - error);
 	// printf("%d\n",error);
 }
 
+
+/* 行进距离控制 */
+void PID_Distance(void) {
+	int speed = 0;
+	int error = 0;
+	short count_l = (short)(__HAL_TIM_GET_COUNTER(&htim2));
+	short count_r = (short)(__HAL_TIM_GET_COUNTER(&htim4));
+	TIM2->CNT = 0;
+	TIM4->CNT = 0;
+	
+	CountAll += (count_l + count_r) / 2;
+	speed = PID_Calculate(&pid_d, CountAll, Length);
+	
+//	error = PID_Calculate(&pid_turn_d,imu_angle[0],Angle_d);
+
+	// 设置速度
+	set_motor_left_speed(speed);
+	set_motor_right_speed(speed);
+}
+
+/* 设置距离环参数 */
+void SetDistanceParam(int length) {
+	Length = length;
+	Angle_d = imu_angle[0];
+	CountAll = 0;
+}
+
+/* 重置PID控制器内部状态 */
+static void PID_Reset(pid_t *pid) {
+    pid->Target = 0;
+    pid->Measure = 0;
+    pid->Error[0] = 0;
+    pid->Error[1] = 0;
+    pid->Error[2] = 0;
+    pid->KpOut = 0;
+    pid->KiOut = 0;
+    pid->KdOut = 0;
+    pid->PID_Out = 0;
+}
+
+/* 转向角度设置 */
+void SetTurnAngle(float angle) {
+	// 重置角度PID控制器, 防止旧值影响
+	PID_Reset(&pid_angle); 
+	
+	TargetAngle = imu_angle[0] + angle;
+	
+	// 归一化目标角度
+	while (TargetAngle > 180.0f) TargetAngle -= 360.0f;
+	while (TargetAngle <= -180.0f) TargetAngle += 360.0f;
+}
+
 /* 电机总控制(定时中断调用) */
 void MotorRun(void) {
-	static uint16_t cnt = 0;
-	switch(State)  {
-		case WAIT: {
-			PID_Speed(0, 0);
-		}
-		break;
+	static uint16_t turn_done_cnt = 0;
+	static uint16_t move_done_cnt = 0;
+	Event event;
+	switch(MotionState)  {
 		case STOP: {
 			PID_Speed(0, 0);
 		}
 		break;
 		case TURN: {
-			switch(Angle) {
-				case LEFT: {
-					PID_Angle(-90);
-				}
-				break;
-				case RIGHT: {
-					PID_Angle(90);
-				}
-				break;
-				case LEFT_UP: {
-					PID_Angle(-45);
-				}
-				break;
-				case RIGHT_UP: {
-					PID_Angle(45);
-				}
-				break;
-				case REVERSE: {
-					PID_Angle(180);
-				}
-				break;
-				case FRONT: {
-					PID_Angle(0);
-				}
+			PID_Angle(TargetAngle);
+			
+			if (fabs(pid_angle.Error[0]) < 3.0f) { // 可调整的阈值
+				turn_done_cnt++;
+			} 
+			else {
+				turn_done_cnt = 0;  // 如果误差变大，则重置计数器
 			}
-			cnt++;
-			if(cnt >= 100) {
-				cnt = 0;
-				Event = TurnDone;
+			
+			if (turn_done_cnt >= 30) { 
+				turn_done_cnt = 0;
+				MotionState = STOP; // 转向完成先切换到STOP状态
+				event = TurnDone;
+				queue_push(&EventQueue,event);
 			}
 		}
 		break;
 		case TRACK: {
-			if(Speed == SLOW) {
+			if(TrackSpeed == SLOW) {
 				PID_Turn(10);
 			}
-			else if(Speed == FAST) {
-				PID_Turn(30);
+			else if(TrackSpeed == MID) {
+				PID_Turn(15);
+			}
+			else if(TrackSpeed == FAST) {
+				PID_Turn(25);
+			}
+		}
+		break;
+		case MOVE: {
+			PID_Distance();
+			move_done_cnt++;
+			if(move_done_cnt >= 200) {
+				move_done_cnt = 0;
+				event = MoveDone;
+				queue_push(&EventQueue,event);
 			}
 		}
 	}

@@ -1,6 +1,17 @@
 {
     "files.associations": {
         "main.h": "c",
-        "vofa.h": "c"
+        "vofa.h": "c",
+        "task.h": "c",
+        "sensor.h": "c",
+        "track.h": "c",
+        "usart.h": "c",
+        "compare": "c",
+        "cstddef": "c",
+        "limits": "c",
+        "type_traits": "c",
+        "xmemory": "c",
+        "xstring": "c",
+        "xutility": "c"
     }
 }

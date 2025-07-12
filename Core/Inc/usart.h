@@ -29,17 +29,14 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
-#include "Crsf.h"
 
-#define LENGTH 1    //接受缓冲区大小
-extern uint8_t RxFlag;       //接收完成标志；0表示接受未完成，1表示接收完成
-extern uint8_t	RxBuffer[LENGTH];   //接受缓冲区
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart1;
 
 extern UART_HandleTypeDef huart2;
+
+extern UART_HandleTypeDef huart3;
 
 extern UART_HandleTypeDef huart6;
 
@@ -49,6 +46,7 @@ extern UART_HandleTypeDef huart6;
 
 void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
+void MX_USART3_UART_Init(void);
 void MX_USART6_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */

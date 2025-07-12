@@ -35,10 +35,10 @@ f407_pid_test/sensor.o: ..\User\sensor.c ..\User\sensor.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\User\SPI_LCD\lcd.h ..\User\SPI_LCD\lcd_port.h \
   D:\softs\mdk\ARM\ARMCLANG\include\stdbool.h ..\User\SPI_LCD\lcd_font.h \
-  ..\User\IMU\icm42688.h ..\User\IMU\IMU.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\math.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\Core\Inc\usart.h \
-  ..\User\CRSF\Crsf.h ..\User\CRSF\CRC.h ..\User\CRSF\CRSF_PROTOCOL.h \
-  D:\softs\mdk\ARM\ARMCLANG\include\string.h ..\User\fsm.h \
-  ..\User\menu.h D:\softs\mdk\ARM\ARMCLANG\include\stdlib.h \
-  ..\User\pid.h ..\Core\Inc\tim.h
+  ..\User\headfile.h D:\softs\mdk\ARM\ARMCLANG\include\string.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\stdio.h ..\User\soft_timer.h \
+  ..\User\muti_com.h D:\softs\mdk\ARM\ARMCLANG\include\stdarg.h \
+  ..\Core\Inc\usart.h ..\User\IMU\icm42688.h ..\User\vision.h \
+  ..\User\track.h ..\User\vofa.h ..\User\task.h ..\User\IMU\IMU.h \
+  D:\softs\mdk\ARM\ARMCLANG\include\math.h ..\Core\Inc\tim.h \
+  ..\User\hsm.h ..\User\fsm.h ..\User\pid.h

@@ -1,11 +1,7 @@
 #ifndef __VOFA__H
 #define __VOFA__H
 
-#include <stdio.h>
-#include <string.h>
-#include "main.h"
-#include "usart.h"
-#include "pid.h"
+#include  "headfile.h"
 
 #define RX_BUFFER_SIZE 32
 

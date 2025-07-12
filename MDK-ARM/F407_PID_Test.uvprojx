@@ -315,7 +315,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -1020,6 +1020,11 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
+              <FileName>headfile.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\headfile.h</FilePath>
+            </File>
+            <File>
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\pid.c</FilePath>
@@ -1040,14 +1045,14 @@
               <FilePath>..\User\task.h</FilePath>
             </File>
             <File>
-              <FileName>sensor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\sensor.h</FilePath>
-            </File>
-            <File>
               <FileName>sensor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\sensor.h</FilePath>
             </File>
             <File>
               <FileName>menu.c</FileName>
@@ -1078,6 +1083,56 @@
               <FileName>vofa.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\vofa.h</FilePath>
+            </File>
+            <File>
+              <FileName>vision.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vision.c</FilePath>
+            </File>
+            <File>
+              <FileName>vision.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vision.h</FilePath>
+            </File>
+            <File>
+              <FileName>track.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\track.c</FilePath>
+            </File>
+            <File>
+              <FileName>track.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\track.h</FilePath>
+            </File>
+            <File>
+              <FileName>hsm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\hsm.c</FilePath>
+            </File>
+            <File>
+              <FileName>hsm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\hsm.h</FilePath>
+            </File>
+            <File>
+              <FileName>soft_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\soft_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>soft_timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\soft_timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>muti_com.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\muti_com.c</FilePath>
+            </File>
+            <File>
+              <FileName>muti_com.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\muti_com.h</FilePath>
             </File>
           </Files>
         </Group>
